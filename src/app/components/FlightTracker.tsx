@@ -4,7 +4,8 @@
 import { useState } from "react"
 import { FlightDataDisplay } from "./FlightDataDisplay"
 import { AircraftState, FlightInfo } from "@/lib/types/opensky"
-
+  const fetchFlightState = async (icao24: string) => {
+    try {
 export function FlightTracker() {
   const [flightData, setFlightData] = useState<
     AircraftState | FlightInfo[] | null
@@ -37,6 +38,7 @@ export function FlightTracker() {
       )
       if (!response.ok) throw new Error("Failed to fetch airport arrivals")
       const data = await response.json()
+      console.log("Data:  " + data)
       setFlightData(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred")

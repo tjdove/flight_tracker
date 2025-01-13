@@ -1,4 +1,6 @@
 // lib/services/openskyApi.ts
+import { AircraftState, FlightInfo } from "@/lib/types/opensky"
+
 const OPENSKY_BASE_URL = "https://opensky-network.org/api"
 
 class OpenskyService {
