@@ -4,8 +4,7 @@
 import { useState } from "react"
 import { FlightDataDisplay } from "./FlightDataDisplay"
 import { AircraftState, FlightInfo } from "@/lib/types/opensky"
-  const fetchFlightState = async (icao24: string) => {
-    try {
+
 export function FlightTracker() {
   const [flightData, setFlightData] = useState<
     AircraftState | FlightInfo[] | null
@@ -56,6 +55,7 @@ export function FlightTracker() {
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Track Flight
+          <text
         </button>
         <button
           onClick={() => fetchAirportArrivals("KJFK")}
