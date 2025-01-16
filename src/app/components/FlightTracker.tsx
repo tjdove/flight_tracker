@@ -50,12 +50,37 @@ export function FlightTracker() {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Flight Tracker</h1>
       <div className="space-x-4 mb-4">
+        <h2 className="text-lg font-semibold">Track Flight</h2>
+        <input
+          type="text"
+          placeholder="Enter ICAO24"
+          className="px-4 py-2 border rounded"
+          onChange={(e) => setFlightData(e.target.value)}
+        />
+        <button
+          onClick={() => fetchFlightState(flightData as string)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Track Flight
+        </button>
+
+        <input
+          type="text"
+          placeholder="Enter Airport Code"
+          className="px-4 py-2 border rounded"
+          onChange={(e) => setFlightData(e.target.value)}
+        />
+        <button
+          onClick={() => fetchAirportArrivals(flightData as string)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Get Arrivals
+        </button>
         <button
           onClick={() => fetchFlightState("abc123")}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Track Flight
-          <text
+          GitHub Copilot Pro Track Flight
         </button>
         <button
           onClick={() => fetchAirportArrivals("KJFK")}
