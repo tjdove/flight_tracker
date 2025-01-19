@@ -11,7 +11,7 @@ export function FlightTracker() {
   >(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
- 
+
   const fetchFlightState = async (icao24: string) => {
     try {
       setLoading(true)
