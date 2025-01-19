@@ -3,7 +3,7 @@
 
 import { AircraftState, FlightInfo } from "@/lib/types/opensky"
 
-interface FlightDataDisplayProps {
+type FlightDataDisplayProps = {
   data: AircraftState | FlightInfo[] | null
 }
 

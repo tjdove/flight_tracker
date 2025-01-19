@@ -1,5 +1,5 @@
 // lib/types/opensky.ts
-export interface AircraftState {
+export type AircraftState = {
   icao24: string
   callsign: string | null
   originCountry: string
@@ -13,7 +13,7 @@ export interface AircraftState {
   timestamp: number
 }
 
-export interface FlightInfo {
+export type FlightInfo = {
   icao24: string
   firstSeen: number
   lastSeen: number

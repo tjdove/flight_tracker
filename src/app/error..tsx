@@ -1,7 +1,8 @@
 "use client"
 
 import React from "react"
-interface ErrorProps {
+
+type ErrorProps = {
   error: Error
   reset: () => void
 }
