@@ -16,9 +16,10 @@ export function FlightTracker() {
   const fetchFlightState = async (icao24: string) => {
     try {
       setLoading(true)
-      // const response = await fetch(`/api/flights?action=state&param1=${icao24}`)
-      const response = await fetch(`https://opensky-network.org/api/states/all`)
-      console.log("Response:  " + response)
+      const response = await fetch(
+        `https://opensky-network.org//api/flights?action=state&param1=${icao24}`
+      )
+      //const response = await fetch(`https://opensky-network.org/api/states/all`)
       if (!response.ok) throw new Error("Failed to fetch flight state")
       const data = await response.json()
       setFlightData(data)
@@ -61,7 +62,7 @@ export function FlightTracker() {
           // onChange={(e) => setFlightData(e.target.value)}
         />
         <button
-          onClick={() => fetchFlightState(flightData as string)}
+          onClick={() => fetchFlightState(e.target.value as string)}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Track Flight
