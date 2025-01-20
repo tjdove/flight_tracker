@@ -11,7 +11,7 @@ export function FlightDataDisplay({ data }: FlightDataDisplayProps) {
   if (!data) return null
 
   return (
-    <div className="p-4 bg-white rounded shadow">
+    <div className="p-4 text-gray-600 bg-white rounded shadow">
       <pre className="whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</pre>
     </div>
   )

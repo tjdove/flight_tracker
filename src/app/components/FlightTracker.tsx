@@ -9,13 +9,16 @@ export function FlightTracker() {
   const [flightData, setFlightData] = useState<
     AircraftState | FlightInfo[] | null
   >(null)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const fetchFlightState = async (icao24: string) => {
     try {
       setLoading(true)
-      const response = await fetch(`/api/flights?action=state&param1=${icao24}`)
+      // const response = await fetch(`/api/flights?action=state&param1=${icao24}`)
+      const response = await fetch(`https://opensky-network.org/api/states/all`)
+      console.log("Response:  " + response)
       if (!response.ok) throw new Error("Failed to fetch flight state")
       const data = await response.json()
       setFlightData(data)
@@ -26,25 +29,25 @@ export function FlightTracker() {
     }
   }
 
-  const fetchAirportArrivals = async (airport: string) => {
-    const now = Math.floor(Date.now() / 1000)
-    const dayAgo = now - 24 * 60 * 60
+  // const fetchAirportArrivals = async (airport: string) => {
+  //   const now = Math.floor(Date.now() / 1000)
+  //   const dayAgo = now - 24 * 60 * 60
 
-    try {
-      setLoading(true)
-      const response = await fetch(
-        `/api/flights?action=arrivals&param1=${airport}&param2=${dayAgo}&param3=${now}`
-      )
-      if (!response.ok) throw new Error("Failed to fetch airport arrivals")
-      const data = await response.json()
-      console.log("Data:  " + data)
-      setFlightData(data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred")
-    } finally {
-      setLoading(false)
-    }
-  }
+  //   try {
+  //     setLoading(true)
+  //     const response = await fetch(
+  //       `/api/flights?action=arrivals&param1=${airport}&param2=${dayAgo}&param3=${now}`
+  //     )
+  //     if (!response.ok) throw new Error("Failed to fetch airport arrivals")
+  //     const data = await response.json()
+  //     console.log("Data:  " + data)
+  //     setFlightData(data)
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : "An error occurred")
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   return (
     <div className="p-6">
@@ -54,8 +57,8 @@ export function FlightTracker() {
         <input
           type="text"
           placeholder="Enter ICAO24"
-          className="px-4 py-2 border rounded"
-          onChange={(e) => setFlightData(e.target.value)}
+          className="px-4 py-2 text-gray-600 border rounded"
+          // onChange={(e) => setFlightData(e.target.value)}
         />
         <button
           onClick={() => fetchFlightState(flightData as string)}
@@ -64,11 +67,11 @@ export function FlightTracker() {
           Track Flight
         </button>
 
-        <input
+        {/* <input
           type="text"
           placeholder="Enter Airport Code"
-          className="px-4 py-2 border rounded"
-          onChange={(e) => setFlightData(e.target.value)}
+          className="px-4 py-2 text-gray-600 border rounded"
+          // onChange={(e) => setFlightData(e.target.value)}
         />
         <button
           onClick={() => fetchAirportArrivals(flightData as string)}
@@ -88,6 +91,7 @@ export function FlightTracker() {
         >
           Get JFK Arrivals
         </button>
+        */}
       </div>
 
       {loading && <p className="text-gray-600">Loading...</p>}
