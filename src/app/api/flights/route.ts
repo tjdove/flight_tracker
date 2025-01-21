@@ -1,6 +1,6 @@
 // app/api/flights/route.ts
 import { NextRequest, NextResponse } from "next/server"
-import { openskyApi } from "@/lib/services/openskyApi"
+import { openskyApi } from "@/lib/services/OpenskyService"
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams

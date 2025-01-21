@@ -1,13 +1,16 @@
 // lib/services/openskyApi.ts
 import { AircraftState, FlightInfo } from "@/lib/types/opensky"
 
+//const OPENSKY_BASE_URL = "https://678f0c5b49875e5a1a90662d.mockapi.io"
 const OPENSKY_BASE_URL = "https://opensky-network.org/api"
 
 class OpenskyService {
   async getAircraftState(icao24: string): Promise<AircraftState | null> {
+    let url = `${OPENSKY_BASE_URL}/states/${icao24}`
+    console.log("URL:" + url)
     try {
       const response = await fetch(
-        `${OPENSKY_BASE_URL}/states/all?icao24=${icao24.toLowerCase()}`,
+        url,
         { next: { revalidate: 30 } } // Cache for 30 seconds
       )
 
