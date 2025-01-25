@@ -2,7 +2,19 @@
 import { AircraftState, FlightInfo } from "@/lib/types/opensky"
 
 //const OPENSKY_BASE_URL = "https://678f0c5b49875e5a1a90662d.mockapi.io"
-const OPENSKY_BASE_URL = "https://opensky-network.org/api"
+const OPENSKY_BASE_URL = process.env.NEXT_PUBLIC_OPENSKY_BASE_URL
+console.log("OPENSKY_BASE_URL:" + OPENSKY_BASE_URL)
+const OPENSKY_USERNAME = process.env.NEXT_PUBLIC_OPENSKY_USERNAME
+const OPENSKY_PASSWORD = process.env.NEXT_PUBLIC_OPENSKY_PASSWORD
+
+// const response = await fetch("https://opensky-network.org/api/states/all", {
+//   headers: {
+//     Authorization: "Basic " + btoa("USERNAME:PASSWORD"),
+//   },
+// })
+
+// "https://opensky-network.org/api"
+//console.log(process.env)
 
 class OpenskyService {
   async getAircraftState(icao24: string): Promise<AircraftState | null> {
@@ -51,8 +63,10 @@ class OpenskyService {
     end: number
   ): Promise<FlightInfo[]> {
     try {
+      let url = `${OPENSKY_BASE_URL}/flights/arrival?airport=${airport.toUpperCase()}&begin=${begin}&end=${end}`
+      console.log("URL:" + url)
       const response = await fetch(
-        `${OPENSKY_BASE_URL}/flights/arrival?airport=${airport.toUpperCase()}&begin=${begin}&end=${end}`,
+        url,
         { next: { revalidate: 60 } } // Cache for 1 minute
       )
 

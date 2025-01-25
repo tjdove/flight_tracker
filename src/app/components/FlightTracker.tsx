@@ -40,20 +40,22 @@ export function FlightTracker() {
   )
 
   async function getArrivalFlightInfo(ICOA24: string) {
-    const data2 = ICOA24
+    const now = Math.floor(Date.now() / 1000)
+    const dayAgo = now - 24 * 60 * 60
+
     console.log("ICOA24:" + ICOA24)
-    // const apiPpromise: Promise<AircraftState | null> =
-    //   openskyApi.getAircraftState(data2)
+    console.log("now:" + now)
+    console.log("dayAgo:" + dayAgo)
+
     let data
     try {
       //setLoading(true)
-      data = await openskyApi.getAircraftState(data2)
+      data = await openskyApi.getAirportArrivals(ICOA24, dayAgo, now)
     } catch (error) {
       console.error("Error:", error)
     }
     console.log(data)
     //setFlightData(data)
-
     //const data = openskyApi.getAirportArrivals("JFK", 0, 100)
     //console.log(data)
   }
