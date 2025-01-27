@@ -1,23 +1,39 @@
-// app/page.tsx
-import React from "react"
-import { useState } from "react"
-const CountContext = React.createContext(0)
+import React, { useContext } from "react"
+//import CountContextProvider, { CountContext } from CountContextReducer
+import CountContextReducer, {
+  CountContext,
+} from "../context/CountContextReducer"
 
-export default function Home() {
-  const [count, setCount] = useState(0)
+function Counter() {
+  var context
+  try {
+    context = useContext(CountContext)
+  } catch (e) {
+    console.log(e)
+  }
+  if (!context) {
+    throw new Error("CountContext must be used within a CountContextProvider")
+  }
+
+  const { state, dispatch } = context
 
   return (
-    <main className="container mx-auto">
-      <ExampleComp1 />
-      <ExampleComp2 />
-    </main>
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+      <button onClick={() => dispatch({ type: "SET_COUNT", payload: 10 })}>
+        Set Count to 10
+      </button>
+    </div>
   )
 }
 
-export function ExampleComp1() {
-  return <div>Example 1</div>
-}
-
-export function ExampleComp2() {
-  return <div>Example 2</div>
+export default function Home() {
+  return (
+    <CountContextReducer>
+      <Counter />
+    </CountContextReducer>
+  )
 }
